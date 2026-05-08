@@ -13,236 +13,344 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('src/public'));
 
 // ===============================
-// RUTA PRINCIPAL
+// PÁGINA PRINCIPAL
 // ===============================
 
 app.get('/', (req, res) => {
 
   res.send(`
 
-    <html>
+  <html>
 
-      <head>
+    <head>
 
-        <title>Lovely Aaron Essentials</title>
+      <title>Lovely Aaron Essentials</title>
 
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        <style>
+      <style>
 
-          *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-          }
+        *{
+          margin:0;
+          padding:0;
+          box-sizing:border-box;
+        }
 
-          body{
+        body{
+          font-family:'Poppins', sans-serif;
+          overflow-x:hidden;
+          background:#f8f1eb;
+        }
 
-            height:100vh;
+        header{
 
-            display:flex;
+          width:100%;
 
-            justify-content:center;
+          position:absolute;
 
-            align-items:center;
+          top:0;
 
-            overflow:hidden;
+          left:0;
 
-            font-family:'Poppins', sans-serif;
+          z-index:10;
 
-            position:relative;
+          padding:25px 80px;
 
-            background:#f5eee6;
-          }
+          display:flex;
 
-          /* ===============================
-          FONDO
-          =============================== */
+          justify-content:space-between;
 
-          .background{
+          align-items:center;
 
-            position:absolute;
+          background:
+          rgba(255,255,255,0.08);
 
-            width:100%;
+          backdrop-filter:blur(10px);
+        }
 
-            height:100%;
+        .logo{
 
-            background-image:url('/img/Dei.jpeg');
+          font-size:40px;
 
-            background-size:cover;
+          font-weight:700;
 
-            background-position:center;
+          color:white;
+        }
 
-            filter:brightness(0.45);
+        .logo span{
+          color:#e7b8a4;
+        }
 
-            z-index:-1;
-          }
+        nav{
+          display:flex;
+          gap:30px;
+        }
 
-          /* ===============================
-          CONTENIDO
-          =============================== */
+        nav a{
 
-          .contenido{
+          text-decoration:none;
 
-            text-align:center;
+          color:white;
 
-            color:white;
+          font-size:17px;
 
-            padding:30px;
-          }
+          transition:0.3s;
+        }
 
-          /* ===============================
-          TÍTULO
-          =============================== */
+        nav a:hover{
+          color:#e7b8a4;
+        }
 
-          h1{
+        .btn-header{
 
-            font-family:'Great Vibes', cursive;
+          background:#d8b08c;
 
-            font-size:95px;
+          padding:12px 24px;
 
-            color:#fffaf5;
+          border-radius:8px;
 
-            text-shadow:
-            0 0 10px rgba(255,255,255,0.8),
-            0 0 20px rgba(255,255,255,0.5),
-            0 0 40px rgba(255,255,255,0.3);
+          color:white;
 
-            margin-bottom:10px;
-          }
+          text-decoration:none;
 
-          /* ===============================
-          SUBTÍTULO
-          =============================== */
+          font-weight:600;
+        }
 
-          p{
+        .hero{
 
-            letter-spacing:5px;
+          width:100%;
 
-            font-size:18px;
+          height:100vh;
 
-            color:#f5e6d3;
+          background-image:
+          linear-gradient(
+          rgba(40,20,10,0.55),
+          rgba(40,20,10,0.55)
+          ),
 
-            margin-bottom:45px;
-          }
+          url('/img/Dei.jpeg');
 
-          /* ===============================
-          BOTONES
-          =============================== */
+          background-size:cover;
 
-          .botones{
+          background-position:center;
 
-            display:flex;
+          display:flex;
 
-            gap:20px;
+          justify-content:center;
 
-            justify-content:center;
+          align-items:center;
 
-            flex-wrap:wrap;
-          }
+          text-align:center;
 
-          a{
+          padding:20px;
 
-            text-decoration:none;
+          position:relative;
+        }
 
-            padding:15px 32px;
+        .hero-content{
 
-            border-radius:50px;
+          max-width:850px;
 
-            background:
-            rgba(255,248,240,0.18);
+          color:white;
+        }
 
-            border:
-            1px solid rgba(255,255,255,0.3);
+        .hero-content h4{
 
-            color:#fffaf5;
+          letter-spacing:8px;
 
-            font-size:18px;
+          font-size:18px;
 
-            font-weight:500;
+          margin-bottom:20px;
 
-            backdrop-filter:blur(10px);
+          color:#f1d3c5;
+        }
 
-            transition:0.3s;
+        .hero-content h1{
 
-            box-shadow:
-            0 8px 20px rgba(0,0,0,0.2);
-          }
+          font-size:90px;
 
-          a:hover{
+          line-height:1.1;
 
-            transform:scale(1.08);
+          margin-bottom:25px;
 
-            background:
-            rgba(216,176,140,0.35);
+          font-weight:700;
+        }
 
-            border:
-            1px solid rgba(255,255,255,0.5);
-          }
+        .hero-content p{
 
-          /* ===============================
-          RESPONSIVE
-          =============================== */
+          font-size:18px;
 
-          @media(max-width:768px){
+          line-height:1.8;
 
-            h1{
-              font-size:60px;
-            }
+          color:#f5e6dd;
 
-            p{
-              font-size:14px;
-              letter-spacing:3px;
-            }
+          margin-bottom:40px;
+        }
 
-            a{
-              width:100%;
-            }
+        .hero-btn{
 
-            .botones{
-              flex-direction:column;
-            }
-          }
+          display:inline-block;
 
-        </style>
+          padding:18px 40px;
 
-      </head>
+          border:2px solid white;
 
-      <body>
+          color:white;
 
-        <div class="background"></div>
+          text-decoration:none;
 
-        <div class="contenido">
+          font-size:18px;
 
-          <h1>Lovely Aaron Essentials</h1>
+          transition:0.3s;
+        }
 
-          <p>RENACE, BRILLA Y CONQUISTA ✨</p>
+        .hero-btn:hover{
 
-          <div class="botones">
+          background:#d8b08c;
 
-            <a href="/api/productos">
-              💄 Productos
-            </a>
+          border-color:#d8b08c;
+        }
 
-            <a href="/api/pedidos">
-              🛍️ Pedidos
-            </a>
+        .menu-rapido{
 
-            <a href="/api/pagos-pse">
-              💳 Pagos
-            </a>
+          position:absolute;
 
-            <a href="/api/citas">
-              📅 Citas
-            </a>
+          bottom:40px;
 
-          </div>
+          width:100%;
+
+          display:flex;
+
+          justify-content:center;
+
+          gap:20px;
+
+          flex-wrap:wrap;
+        }
+
+        .menu-rapido a{
+
+          text-decoration:none;
+
+          background:
+          rgba(255,255,255,0.12);
+
+          backdrop-filter:blur(10px);
+
+          color:white;
+
+          padding:15px 28px;
+
+          border-radius:50px;
+
+          border:
+          1px solid rgba(255,255,255,0.2);
+
+          transition:0.3s;
+        }
+
+        .menu-rapido a:hover{
+
+          background:#d8b08c;
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <header>
+
+        <div class="logo">
+          Lovely <span>Aaron</span>
+        </div>
+
+        <nav>
+
+          <a href="/">Inicio</a>
+
+          <a href="/api/productos">Productos</a>
+
+          <a href="/servicios">Servicios</a>
+
+          <a href="/api/pedidos">Pedidos</a>
+
+          <a href="/api/pagos-pse">Pagos</a>
+
+          <a href="/api/citas">Citas</a>
+
+        </nav>
+
+        <a href="/api/citas" class="btn-header">
+
+          Agendar
+
+        </a>
+
+      </header>
+
+      <section class="hero">
+
+        <div class="hero-content">
+
+          <h4>
+
+            BEAUTY • HAIR • GLAM
+
+          </h4>
+
+          <h1>
+
+            Lovely Aaron Essentials
+
+          </h1>
+
+          <p>
+
+            Renace, brilla y conquista con nuestros
+            productos capilares, pelucas, maquillaje
+            y tratamientos de belleza premium.
+
+          </p>
+
+          <a href="/api/citas" class="hero-btn">
+
+            Agendar cita
+
+          </a>
 
         </div>
 
-      </body>
+        <div class="menu-rapido">
 
-    </html>
+          <a href="/api/productos">
+            💄 Productos
+          </a>
+
+          <a href="/servicios">
+            ✨ Servicios
+          </a>
+
+          <a href="/api/pedidos">
+            🛍️ Pedidos
+          </a>
+
+          <a href="/api/pagos-pse">
+            💳 Pagos
+          </a>
+
+          <a href="/api/citas">
+            📅 Citas
+          </a>
+
+        </div>
+
+      </section>
+
+    </body>
+
+  </html>
 
   `);
 
@@ -271,6 +379,204 @@ app.use('/api/pedidos', pedidosRouter);
 app.use('/api/pagos-pse', pagosRouter);
 
 app.use('/api/citas', citasRouter);
+
+// ===============================
+// SERVICIOS
+// ===============================
+
+const servicios = [
+
+  {
+    nombre: 'Instalación de Pelucas',
+    descripcion: 'Instalación profesional y natural para lace front y pelucas premium.',
+    imagen: '/img/pelucalace.jpeg'
+  },
+
+  {
+    nombre: 'Peinados y Styling',
+    descripcion: 'Peinados modernos, ondas, alisados y acabados glam.',
+    imagen: '/img/variedad.jpeg'
+  },
+
+  {
+    nombre: 'Tratamientos Capilares',
+    descripcion: 'Hidratación, nutrición y recuperación del cabello.',
+    imagen: '/img/tonico.jpeg'
+  },
+
+  {
+    nombre: 'Maquillaje Profesional',
+    descripcion: 'Maquillaje social, glam y beauty para cualquier ocasión.',
+    imagen: '/img/paleta.jpeg'
+  }
+
+];
+
+// ===============================
+// RUTA SERVICIOS
+// ===============================
+
+app.get('/servicios', (req, res) => {
+
+  let html = `
+
+  <html>
+
+    <head>
+
+      <title>Servicios - Lovely Aaron</title>
+
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+      <style>
+
+        body{
+
+          font-family:'Poppins', sans-serif;
+
+          background:#f5ebe3;
+
+          padding:50px;
+        }
+
+        h1{
+
+          text-align:center;
+
+          font-size:60px;
+
+          margin-bottom:50px;
+
+          color:#7b4b35;
+        }
+
+        .contenedor{
+
+          display:grid;
+
+          grid-template-columns:
+          repeat(auto-fit, minmax(300px, 1fr));
+
+          gap:30px;
+        }
+
+        .card{
+
+          background:white;
+
+          border-radius:25px;
+
+          overflow:hidden;
+
+          box-shadow:
+          0 10px 25px rgba(0,0,0,0.15);
+
+          transition:0.3s;
+        }
+
+        .card:hover{
+
+          transform:translateY(-8px);
+        }
+
+        .card img{
+
+          width:100%;
+
+          height:280px;
+
+          object-fit:cover;
+        }
+
+        .contenido{
+
+          padding:25px;
+        }
+
+        .contenido h2{
+
+          color:#8b5e3c;
+
+          margin-bottom:15px;
+        }
+
+        .contenido p{
+
+          color:#555;
+
+          line-height:1.6;
+        }
+
+        .boton{
+
+          display:inline-block;
+
+          margin-top:20px;
+
+          background:#d8b08c;
+
+          color:white;
+
+          padding:12px 22px;
+
+          border-radius:50px;
+
+          text-decoration:none;
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <h1>Nuestros Servicios ✨</h1>
+
+      <div class="contenedor">
+
+  `;
+
+  servicios.forEach(servicio => {
+
+    html += `
+
+      <div class="card">
+
+        <img src="${servicio.imagen}">
+
+        <div class="contenido">
+
+          <h2>${servicio.nombre}</h2>
+
+          <p>${servicio.descripcion}</p>
+
+          <a href="/api/citas" class="boton">
+
+            Agendar
+
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  html += `
+
+      </div>
+
+    </body>
+
+  </html>
+
+  `;
+
+  res.send(html);
+
+});
 
 // ===============================
 // PUERTO

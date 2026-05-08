@@ -2,123 +2,166 @@ const express = require('express');
 
 const router = express.Router();
 
-// ===============================
-// GUARDAR CITAS
-// ===============================
-
-let citas = [];
-
-// ===============================
-// VER FORMULARIO
-// ===============================
-
 router.get('/', (req, res) => {
 
-  let html = `
+  res.send(`
 
   <html>
 
     <head>
 
-      <title>Citas - Lovely Aaron</title>
+      <title>Agenda tu cita</title>
 
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
       <style>
 
-        body{
+        *{
           margin:0;
-          min-height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
+          padding:0;
+          box-sizing:border-box;
+        }
+
+        body{
+
           font-family:'Poppins', sans-serif;
-          position:relative;
-          overflow:auto;
-        }
 
-        /* Fondo */
+          min-height:100vh;
 
-        .background{
-          position:fixed;
-          width:100%;
-          height:100%;
+          display:flex;
 
-          background-image:url('/img/Dei.jpeg');
+          justify-content:center;
 
-          background-size:cover;
-          background-position:center;
-
-          filter:brightness(0.35);
-
-          z-index:-1;
-        }
-
-        /* Caja */
-
-        .contenedor{
-          width:90%;
-          max-width:600px;
-
-          background:rgba(255,255,255,0.08);
-
-          border:1px solid rgba(255,255,255,0.2);
-
-          border-radius:30px;
+          align-items:center;
 
           padding:40px;
 
-          backdrop-filter:blur(10px);
+          background:
+          linear-gradient(
+          rgba(30,20,15,0.75),
+          rgba(30,20,15,0.75)
+          ),
+          url('/img/Dei.jpeg');
+
+          background-size:cover;
+
+          background-position:center;
+        }
+
+        .contenedor{
+
+          width:100%;
+
+          max-width:700px;
+
+          background:
+          rgba(255,255,255,0.08);
+
+          border:
+          1px solid rgba(255,255,255,0.15);
+
+          backdrop-filter:blur(15px);
+
+          border-radius:35px;
+
+          padding:50px;
+
+          box-shadow:
+          0 20px 40px rgba(0,0,0,0.35);
 
           color:white;
-
-          margin:40px 0;
         }
 
         h1{
+
           text-align:center;
 
           font-family:'Great Vibes', cursive;
 
-          font-size:70px;
+          font-size:75px;
+
+          color:#f5dfcf;
 
           margin-bottom:10px;
         }
 
-        p{
+        .subtitulo{
+
           text-align:center;
 
-          margin-bottom:30px;
+          margin-bottom:40px;
+
+          color:#f1d5c3;
+
+          letter-spacing:3px;
         }
 
-        input{
+        form{
+
+          display:flex;
+
+          flex-direction:column;
+
+          gap:22px;
+        }
+
+        input,
+        select,
+        textarea{
+
           width:100%;
 
-          padding:15px;
-
-          margin-bottom:20px;
+          padding:18px;
 
           border:none;
 
-          border-radius:15px;
+          border-radius:18px;
+
+          background:
+          rgba(255,255,255,0.12);
+
+          color:white;
 
           font-size:16px;
+
+          outline:none;
+        }
+
+        input::placeholder,
+        textarea::placeholder{
+
+          color:#f5e6dd;
+        }
+
+        option{
+
+          color:black;
+        }
+
+        textarea{
+
+          resize:none;
+
+          height:130px;
         }
 
         button{
-          width:100%;
 
-          padding:15px;
+          margin-top:15px;
+
+          padding:18px;
 
           border:none;
 
-          border-radius:15px;
+          border-radius:50px;
 
-          background:#ff4d88;
+          background:#d8b08c;
 
           color:white;
 
           font-size:18px;
+
+          font-weight:bold;
 
           cursor:pointer;
 
@@ -126,33 +169,23 @@ router.get('/', (req, res) => {
         }
 
         button:hover{
-          background:#ff1f6b;
-        }
 
-        .cita{
-          background:rgba(255,255,255,0.08);
+          background:#c89a72;
 
-          padding:20px;
-
-          border-radius:20px;
-
-          margin-top:20px;
+          transform:scale(1.03);
         }
 
         .volver{
-          display:inline-block;
 
-          margin-top:25px;
+          display:block;
 
-          text-decoration:none;
+          text-align:center;
+
+          margin-top:30px;
 
           color:white;
 
-          background:rgba(255,255,255,0.12);
-
-          padding:12px 24px;
-
-          border-radius:50px;
+          text-decoration:none;
         }
 
       </style>
@@ -161,79 +194,87 @@ router.get('/', (req, res) => {
 
     <body>
 
-      <div class="background"></div>
-
       <div class="contenedor">
 
-        <h1>Agenda tu cita ✨</h1>
+        <h1>Reserva tu cita</h1>
 
-        <p>Lovely Aaron Essentials</p>
+        <p class="subtitulo">
 
-        <form method="POST" action="/api/citas">
+          EXPERIENCIA PREMIUM LOVELY AARON
 
-          <input 
-            type="text" 
-            name="nombre" 
-            placeholder="Tu nombre"
-            required
-          >
+        </p>
 
-          <input 
-            type="text" 
-            name="servicio" 
-            placeholder="Servicio que deseas"
-            required
-          >
+        <form>
 
-          <input 
-            type="date" 
-            name="fecha"
-            required
-          >
+          <input
+          type="text"
+          placeholder="Nombre completo">
 
-          <input 
-            type="time" 
-            name="hora"
-            required
-          >
+          <input
+          type="tel"
+          placeholder="Número de WhatsApp">
 
-          <button type="submit">
-            Agendar cita
+          <select>
+
+            <option>
+
+              Selecciona un servicio
+
+            </option>
+
+            <option>
+
+              Instalación de peluca
+
+            </option>
+
+            <option>
+
+              Extensiones premium
+
+            </option>
+
+            <option>
+
+              Tratamiento capilar
+
+            </option>
+
+            <option>
+
+              Maquillaje profesional
+
+            </option>
+
+            <option>
+
+              Cejas y pestañas
+
+            </option>
+
+          </select>
+
+          <input type="date">
+
+          <input type="time">
+
+          <textarea
+          placeholder="Cuéntanos qué deseas realizarte...">
+          </textarea>
+
+          <button>
+
+            Reservar cita ✨
+
           </button>
 
         </form>
 
-  `;
+        <a href="/" class="volver">
 
-  citas.forEach(cita => {
+          ⬅ Volver al inicio
 
-    html += `
-
-      <div class="cita">
-
-        <h3>${cita.nombre}</h3>
-
-        <p>💄 Servicio: ${cita.servicio}</p>
-
-        <p>📅 Fecha: ${cita.fecha}</p>
-
-        <p>⏰ Hora: ${cita.hora}</p>
-
-      </div>
-
-    `;
-
-  });
-
-  html += `
-
-        <center>
-
-          <a class="volver" href="/">
-            ⬅ Volver al inicio
-          </a>
-
-        </center>
+        </a>
 
       </div>
 
@@ -241,32 +282,7 @@ router.get('/', (req, res) => {
 
   </html>
 
-  `;
-
-  res.send(html);
-
-});
-
-// ===============================
-// GUARDAR CITA
-// ===============================
-
-router.post('/', (req, res) => {
-
-  const { nombre, servicio, fecha, hora } = req.body;
-
-  const nuevaCita = {
-
-    nombre,
-    servicio,
-    fecha,
-    hora
-
-  };
-
-  citas.push(nuevaCita);
-
-  res.redirect('/api/citas');
+  `);
 
 });
 
