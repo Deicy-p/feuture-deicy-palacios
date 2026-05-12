@@ -9,177 +9,177 @@ const router = express.Router();
 const productos = [
 
   {
-    nombre: 'Shampoo Hidratante',
+      nombre: 'Shampoo Hidratante',
 
-    precio: '$50.000',
+          precio: '$50.000',
 
-    imagen: '/img/HIDRATANTE.jpeg',
+              imagen: '/img/HIDRATANTE.jpeg',
 
-    descripcion:
-    'Limpia profundamente mientras hidrata y revitaliza el cabello, dejándolo suave, brillante y sedoso desde la primera aplicación.'
-  },
+                  descripcion:
+                      'Limpia profundamente mientras hidrata y revitaliza el cabello, dejándolo suave, brillante y sedoso desde la primera aplicación.'
+                        },
 
-  {
-    nombre: 'Mascarilla Reparadora',
+                          {
+                              nombre: 'Mascarilla Reparadora',
 
-    precio: '$60.000',
+                                  precio: '$60.000',
 
-    imagen: '/img/Mascarilla.jpeg',
+                                      imagen: '/img/Mascarilla.jpeg',
 
-    descripcion:
-    'Tratamiento intensivo que nutre y repara el cabello maltratado, devolviendo fuerza, brillo y elasticidad.'
-  },
+                                          descripcion:
+                                              'Tratamiento intensivo que nutre y repara el cabello maltratado, devolviendo fuerza, brillo y elasticidad.'
+                                                },
 
-  {
-    nombre: 'Acondicionador Nutritivo',
+                                                  {
+                                                      nombre: 'Acondicionador Nutritivo',
 
-    precio: '$50.000',
+                                                          precio: '$50.000',
 
-    imagen: '/img/Acondicionador.jpeg',
+                                                              imagen: '/img/Acondicionador.jpeg',
 
-    descripcion:
-    'Desenreda y suaviza el cabello mientras aporta nutrición profunda para un acabado manejable y saludable.'
-  },
-  {
-    nombre: 'Kit Natural de Romero',
+                                                                  descripcion:
+                                                                      'Desenreda y suaviza el cabello mientras aporta nutrición profunda para un acabado manejable y saludable.'
+                                                                        },
+                                                                          {
+                                                                              nombre: 'Kit Natural de Romero',
 
-    precio: '$90.000',
+                                                                                  precio: '$90.000',
 
-    imagen: '/img/Kit.jpeg',
+                                                                                      imagen: '/img/Kit.jpeg',
 
-    descripcion:
-    'Set de productos naturales para el cuidado del cabello, con ingredientes seleccionados para una experiencia de baño relajante y revitalizante.'
-  },
+                                                                                          descripcion:
+                                                                                              'Set de productos naturales para el cuidado del cabello, con ingredientes seleccionados para una experiencia de baño relajante y revitalizante.'
+                                                                                                },
 
-  {
-    nombre: 'Spray Protector Térmico',
+                                                                                                  {
+                                                                                                      nombre: 'Spray Protector Térmico',
 
-    precio: '$45.000',
+                                                                                                          precio: '$45.000',
 
-    imagen: '/img/spray.jpeg',
+                                                                                                              imagen: '/img/spray.jpeg',
 
-    descripcion:
-    'Protege el cabello del calor de planchas y secadores, evitando el quiebre y manteniendo el brillo natural.'
-  },
+                                                                                                                  descripcion:
+                                                                                                                      'Protege el cabello del calor de planchas y secadores, evitando el quiebre y manteniendo el brillo natural.'
+                                                                                                                        },
 
-  {
-    nombre: 'Vitaminas Capilares',
+                                                                                                                          {
+                                                                                                                              nombre: 'Vitaminas Capilares',
 
-    precio: '$95.000',
+                                                                                                                                  precio: '$95.000',
 
-    imagen: '/img/vitaminas.jpeg',
+                                                                                                                                      imagen: '/img/vitaminas.jpeg',
 
-    descripcion:
-    'Fórmula enriquecida para fortalecer el cabello desde el interior, aportando brillo, crecimiento y vitalidad.'
-  },
+                                                                                                                                          descripcion:
+                                                                                                                                              'Fórmula enriquecida para fortalecer el cabello desde el interior, aportando brillo, crecimiento y vitalidad.'
+                                                                                                                                                },
 
-  {
-    nombre: 'Tónico Anticaída',
+                                                                                                                                                  {
+                                                                                                                                                      nombre: 'Tónico Anticaída',
 
-    precio: '$80.000',
+                                                                                                                                                          precio: '$80.000',
 
-    imagen: '/img/tonico.jpeg',
+                                                                                                                                                              imagen: '/img/tonico.jpeg',
 
-    descripcion:
-    'Fortalece la raíz capilar y ayuda a disminuir la caída del cabello estimulando el crecimiento saludable.'
-  },
+                                                                                                                                                                  descripcion:
+                                                                                                                                                                      'Fortalece la raíz capilar y ayuda a disminuir la caída del cabello estimulando el crecimiento saludable.'
+                                                                                                                                                                        },
 
-  {
-    nombre: 'Serum Brillo Extremo',
+                                                                                                                                                                          {
+                                                                                                                                                                              nombre: 'Serum Brillo Extremo',
 
-    precio: '$70.000',
+                                                                                                                                                                                  precio: '$70.000',
 
-    imagen: '/img/serum.jpeg',
+                                                                                                                                                                                      imagen: '/img/serum.jpeg',
 
-    descripcion:
-    'Aporta un acabado luminoso y sedoso mientras controla el frizz y protege las puntas.'
-  },
+                                                                                                                                                                                          descripcion:
+                                                                                                                                                                                              'Aporta un acabado luminoso y sedoso mientras controla el frizz y protege las puntas.'
+                                                                                                                                                                                                },
 
-  {
-    nombre: 'Peluca Lace Front',
+                                                                                                                                                                                                  {
+                                                                                                                                                                                                      nombre: 'Peluca Lace Front',
 
-    precio: '$450.000',
+                                                                                                                                                                                                          precio: '$450.000',
 
-    imagen: '/img/pelucalace.jpeg',
+                                                                                                                                                                                                              imagen: '/img/pelucalace.jpeg',
 
-    descripcion:
-    'Peluca premium con acabado natural y línea frontal invisible para un look elegante y realista.'
-  },
+                                                                                                                                                                                                                  descripcion:
+                                                                                                                                                                                                                      'Peluca premium con acabado natural y línea frontal invisible para un look elegante y realista.'
+                                                                                                                                                                                                                        },
 
-  {
-    nombre: 'Peluca Natural',
+                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                              nombre: 'Peluca Natural',
 
-    precio: '$520.000',
+                                                                                                                                                                                                                                  precio: '$520.000',
 
-    imagen: '/img/Natural.jpeg',
+                                                                                                                                                                                                                                      imagen: '/img/Natural.jpeg',
 
-    descripcion:
-    'Cabello suave y natural con movimiento impecable para lucir hermosa en cualquier ocasión.'
-  },
+                                                                                                                                                                                                                                          descripcion:
+                                                                                                                                                                                                                                              'Cabello suave y natural con movimiento impecable para lucir hermosa en cualquier ocasión.'
+                                                                                                                                                                                                                                                },
 
-  {
-    nombre: 'Peluca Sintética',
+                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                      nombre: 'Peluca Sintética',
 
-    precio: '$350.000',
+                                                                                                                                                                                                                                                          precio: '$350.000',
 
-    imagen: '/img/sintetica.jpeg',
+                                                                                                                                                                                                                                                              imagen: '/img/sintetica.jpeg',
 
-    descripcion:
-    'Diseño moderno y práctico con excelente textura y estilo para transformar tu look fácilmente.'
-  },
+                                                                                                                                                                                                                                                                  descripcion:
+                                                                                                                                                                                                                                                                      'Diseño moderno y práctico con excelente textura y estilo para transformar tu look fácilmente.'
+                                                                                                                                                                                                                                                                        },
 
-  {
-    nombre: 'Extensiones Premium',
+                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                              nombre: 'Extensiones Premium',
 
-    precio: '$400.000',
+                                                                                                                                                                                                                                                                                  precio: '$400.000',
 
-    imagen: '/img/premium.jpeg',
+                                                                                                                                                                                                                                                                                      imagen: '/img/premium.jpeg',
 
-    descripcion:
-    'Extensiones de alta calidad con acabado sedoso y natural que aportan volumen, largo y elegancia.'
-  },
+                                                                                                                                                                                                                                                                                          descripcion:
+                                                                                                                                                                                                                                                                                              'Extensiones de alta calidad con acabado sedoso y natural que aportan volumen, largo y elegancia.'
+                                                                                                                                                                                                                                                                                                },
 
-  {
-    nombre: 'Paleta de Sombras',
+                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                      nombre: 'Paleta de Sombras',
 
-    precio: '$80.000',
+                                                                                                                                                                                                                                                                                                          precio: '$80.000',
 
-    imagen: '/img/paleta.jpeg',
+                                                                                                                                                                                                                                                                                                              imagen: '/img/paleta.jpeg',
 
-    descripcion:
-    'Colores intensos y elegantes para crear maquillajes glamorosos y duraderos.'
-  },
+                                                                                                                                                                                                                                                                                                                  descripcion:
+                                                                                                                                                                                                                                                                                                                      'Colores intensos y elegantes para crear maquillajes glamorosos y duraderos.'
+                                                                                                                                                                                                                                                                                                                        },
 
-  {
-    nombre: 'Labiales de Larga Duración',
+                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                              nombre: 'Labiales de Larga Duración',
 
-    precio: '$45.000',
+                                                                                                                                                                                                                                                                                                                                  precio: '$45.000',
 
-    imagen: '/img/labiales.jpeg',
+                                                                                                                                                                                                                                                                                                                                      imagen: '/img/labiales.jpeg',
 
-    descripcion:
-    'Color vibrante y acabado impecable que permanece perfecto durante horas.'
-  },
+                                                                                                                                                                                                                                                                                                                                          descripcion:
+                                                                                                                                                                                                                                                                                                                                              'Color vibrante y acabado impecable que permanece perfecto durante horas.'
+                                                                                                                                                                                                                                                                                                                                                },
 
-  {
-    nombre: 'Delineador Líquido',
+                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                      nombre: 'Delineador Líquido',
 
-    precio: '$35.000',
+                                                                                                                                                                                                                                                                                                                                                          precio: '$35.000',
 
-    imagen: '/img/delineador.jpeg',
+                                                                                                                                                                                                                                                                                                                                                              imagen: '/img/delineador.jpeg',
 
-    descripcion:
-    'Precisión y duración para una mirada impactante y sofisticada.'
-  },
-  {
-    nombre: 'Vaseline',
-    precio: '$45.000',
-    imagen: '/img/Vaseline.jpeg',
-    descripcion: 'Protección y hidratación para la piel seca.'
-  }
+                                                                                                                                                                                                                                                                                                                                                                  descripcion:
+                                                                                                                                                                                                                                                                                                                                                                      'Precisión y duración para una mirada impactante y sofisticada.'
+                                                                                                                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                                              nombre: 'Vaseline',
+                                                                                                                                                                                                                                                                                                                                                                                  precio: '$45.000',
+                                                                                                                                                                                                                                                                                                                                                                                      imagen: '/img/Vaseline.jpeg',
+                                                                                                                                                                                                                                                                                                                                                                                          descripcion: 'Protección y hidratación para la piel seca.'
+                                                                                                                                                                                                                                                                                                                                                                                            }
 
-];
-
+                                                                                                                                                                                                                                                                                                                                                                                            ];
+                                                                                                                                                                                                                                                                                                                                                                                            
 // ===============================
 // RUTA PRODUCTOS
 // ===============================
