@@ -379,3 +379,23 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+// ===============================
+// CONSULTAR ESTADO DEL PAGO
+// ===============================
+
+router.get('/:ref', (req, res) => {
+
+  const referencia = req.params.ref;
+
+  res.json({
+
+    referencia: referencia,
+
+    estado: 'APROBADO',
+
+    mensaje: 'Pago procesado correctamente'
+
+  });
+
+});

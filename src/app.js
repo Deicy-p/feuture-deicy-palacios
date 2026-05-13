@@ -254,6 +254,29 @@ app.get('/', (req, res) => {
           background:#d8b08c;
         }
 
+        /* ===============================
+        FOOTER
+        =============================== */
+
+        footer{
+
+          position:absolute;
+
+          bottom:10px;
+
+          width:100%;
+
+          text-align:center;
+
+          color:rgba(255,255,255,0.85);
+
+          font-size:14px;
+
+          letter-spacing:1px;
+
+          z-index:20;
+        }
+
       </style>
 
     </head>
@@ -348,6 +371,15 @@ app.get('/', (req, res) => {
 
       </section>
 
+      <!-- FOOTER -->
+
+      <footer>
+
+        © 2026 Lovely Aaron Essentials ✨
+        Creado con ❤️ por Deicy Palacios.
+
+      </footer>
+
     </body>
 
   </html>
@@ -379,204 +411,6 @@ app.use('/api/pedidos', pedidosRouter);
 app.use('/api/pagos-pse', pagosRouter);
 
 app.use('/api/citas', citasRouter);
-
-// ===============================
-// SERVICIOS
-// ===============================
-
-const servicios = [
-
-  {
-    nombre: 'Instalación de Pelucas',
-    descripcion: 'Instalación profesional y natural para lace front y pelucas premium.',
-    imagen: '/img/pelucalace.jpeg'
-  },
-
-  {
-    nombre: 'Peinados y Styling',
-    descripcion: 'Peinados modernos, ondas, alisados y acabados glam.',
-    imagen: '/img/variedad.jpeg'
-  },
-
-  {
-    nombre: 'Tratamientos Capilares',
-    descripcion: 'Hidratación, nutrición y recuperación del cabello.',
-    imagen: '/img/tonico.jpeg'
-  },
-
-  {
-    nombre: 'Maquillaje Profesional',
-    descripcion: 'Maquillaje social, glam y beauty para cualquier ocasión.',
-    imagen: '/img/paleta.jpeg'
-  }
-
-];
-
-// ===============================
-// RUTA SERVICIOS
-// ===============================
-
-app.get('/servicios', (req, res) => {
-
-  let html = `
-
-  <html>
-
-    <head>
-
-      <title>Servicios - Lovely Aaron</title>
-
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-      <style>
-
-        body{
-
-          font-family:'Poppins', sans-serif;
-
-          background:#f5ebe3;
-
-          padding:50px;
-        }
-
-        h1{
-
-          text-align:center;
-
-          font-size:60px;
-
-          margin-bottom:50px;
-
-          color:#7b4b35;
-        }
-
-        .contenedor{
-
-          display:grid;
-
-          grid-template-columns:
-          repeat(auto-fit, minmax(300px, 1fr));
-
-          gap:30px;
-        }
-
-        .card{
-
-          background:white;
-
-          border-radius:25px;
-
-          overflow:hidden;
-
-          box-shadow:
-          0 10px 25px rgba(0,0,0,0.15);
-
-          transition:0.3s;
-        }
-
-        .card:hover{
-
-          transform:translateY(-8px);
-        }
-
-        .card img{
-
-          width:100%;
-
-          height:280px;
-
-          object-fit:cover;
-        }
-
-        .contenido{
-
-          padding:25px;
-        }
-
-        .contenido h2{
-
-          color:#8b5e3c;
-
-          margin-bottom:15px;
-        }
-
-        .contenido p{
-
-          color:#555;
-
-          line-height:1.6;
-        }
-
-        .boton{
-
-          display:inline-block;
-
-          margin-top:20px;
-
-          background:#d8b08c;
-
-          color:white;
-
-          padding:12px 22px;
-
-          border-radius:50px;
-
-          text-decoration:none;
-        }
-
-      </style>
-
-    </head>
-
-    <body>
-
-      <h1>Nuestros Servicios ✨</h1>
-
-      <div class="contenedor">
-
-  `;
-
-  servicios.forEach(servicio => {
-
-    html += `
-
-      <div class="card">
-
-        <img src="${servicio.imagen}">
-
-        <div class="contenido">
-
-          <h2>${servicio.nombre}</h2>
-
-          <p>${servicio.descripcion}</p>
-
-          <a href="/api/citas" class="boton">
-
-            Agendar
-
-          </a>
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
-
-  html += `
-
-      </div>
-
-    </body>
-
-  </html>
-
-  `;
-
-  res.send(html);
-
-});
 
 // ===============================
 // PUERTO
