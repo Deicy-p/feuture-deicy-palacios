@@ -3,24 +3,24 @@ const express = require('express');
 const router = express.Router();
 
 // ===============================
-// PAGOS
+// PAGOS PSE
 // ===============================
 
 let pagos = [];
 
 // ===============================
-// FORMULARIO PAGOS
+// FORMULARIO PSE
 // ===============================
 
 router.get('/', (req, res) => {
 
-  let html = `
+  res.send(`
 
   <html>
 
     <head>
 
-      <title>Pagos - Lovely Aaron</title>
+      <title>Pagos PSE</title>
 
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -40,8 +40,8 @@ router.get('/', (req, res) => {
 
           background:
           linear-gradient(
-          rgba(40,20,10,0.70),
-          rgba(40,20,10,0.70)
+          rgba(40,20,10,0.65),
+          rgba(40,20,10,0.65)
           ),
           url('/img/Dei.jpeg');
 
@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
 
           width:100%;
 
-          max-width:600px;
+          max-width:550px;
 
           background:
           rgba(255,255,255,0.12);
@@ -148,19 +148,6 @@ router.get('/', (req, res) => {
           background:#c49a75;
         }
 
-        .volver{
-
-          display:block;
-
-          margin-top:25px;
-
-          text-align:center;
-
-          color:white;
-
-          text-decoration:none;
-        }
-
       </style>
 
     </head>
@@ -169,7 +156,7 @@ router.get('/', (req, res) => {
 
       <div class="card">
 
-        <h1>💳 Pagos</h1>
+        <h1>💳 Pago PSE</h1>
 
         <form method="POST" action="/api/pagos-pse">
 
@@ -178,7 +165,6 @@ router.get('/', (req, res) => {
           <input
             type="text"
             name="cliente"
-            placeholder="Escribe tu nombre"
             required
           >
 
@@ -186,7 +172,7 @@ router.get('/', (req, res) => {
 
           <select name="banco" required>
 
-            <option value="">Selecciona</option>
+            <option value="">Selecciona un banco</option>
 
             <option>Bancolombia</option>
 
@@ -194,43 +180,29 @@ router.get('/', (req, res) => {
 
             <option>Davivienda</option>
 
+            <option>BBVA</option>
+
             <option>Banco de Bogotá</option>
 
-            <option>BBVA</option>
+            <option>Banco Popular</option>
 
           </select>
 
-          <label>Valor del pago</label>
+          <label>Valor</label>
 
           <input
             type="number"
             name="valor"
-            placeholder="Ej: 50000"
-            required
-          >
-
-          <label>Referencia</label>
-
-          <input
-            type="text"
-            name="referencia"
-            placeholder="Ej: LA2026"
             required
           >
 
           <button type="submit">
 
-            Procesar Pago
+            Pagar ahora
 
           </button>
 
         </form>
-
-        <a class="volver" href="/">
-
-          ⬅ Volver al inicio
-
-        </a>
 
       </div>
 
@@ -238,9 +210,7 @@ router.get('/', (req, res) => {
 
   </html>
 
-  `;
-
-  res.send(html);
+  `);
 
 });
 
@@ -253,29 +223,60 @@ router.post('/', (req, res) => {
   const {
 
     cliente,
-
     banco,
-
-    valor,
-
-    referencia
+    valor
 
   } = req.body;
+
+  // VALIDACIONES
+
+  if (!cliente || !banco || !valor) {
+
+    return res.status(400).send('Todos los campos son obligatorios');
+
+  }
+
+  // ESTADOS DINÁMICOS
+
+  const estados = [
+
+    'APROBADO',
+
+    'RECHAZADO',
+
+    'PENDIENTE'
+
+  ];
+
+  const estado = estados[
+    Math.floor(Math.random() * estados.length)
+  ];
+
+  // REFERENCIA
+
+  const referencia =
+    'PSE-' + Math.floor(Math.random() * 100000);
+
+  // FECHA
+
+  const fecha = new Date().toLocaleString();
+
+  // NUEVO PAGO
 
   const nuevoPago = {
 
     cliente,
-
     banco,
-
     valor,
-
+    estado,
     referencia,
+    fecha
 
-    estado:'APROBADO'
   };
 
   pagos.push(nuevoPago);
+
+  // RESPUESTA HTML
 
   res.send(`
 
@@ -283,7 +284,7 @@ router.post('/', (req, res) => {
 
     <head>
 
-      <title>Pago Exitoso</title>
+      <title>Pago Procesado</title>
 
       <style>
 
@@ -313,23 +314,38 @@ router.post('/', (req, res) => {
           text-align:center;
 
           box-shadow:0 10px 20px rgba(0,0,0,0.2);
+
+          width:90%;
+
+          max-width:500px;
         }
 
         h1{
 
           color:#8b5e3c;
+
+          margin-bottom:20px;
         }
 
         p{
 
-          margin-top:10px;
+          margin:12px 0;
+
+          font-size:17px;
+        }
+
+        .estado{
+
+          font-weight:bold;
+
+          color:#d48c70;
         }
 
         a{
 
           display:inline-block;
 
-          margin-top:20px;
+          margin-top:25px;
 
           padding:12px 24px;
 
@@ -341,6 +357,20 @@ router.post('/', (req, res) => {
 
           border-radius:12px;
         }
+          .volver{
+
+           display:block;
+
+           margin-top:25px;
+
+           text-align:center;
+
+           color:white;
+
+           text-decoration:none;
+
+           font-size:16px;
+          }
 
       </style>
 
@@ -350,21 +380,42 @@ router.post('/', (req, res) => {
 
       <div class="mensaje">
 
-        <h1>✨ Pago realizado con éxito ✨</h1>
+        <h1>
+          💳 Pago Procesado
+        </h1>
 
-        <p><strong>Cliente:</strong> ${cliente}</p>
+        <p>
+          <strong>Cliente:</strong> ${cliente}
+        </p>
 
-        <p><strong>Banco:</strong> ${banco}</p>
+        <p>
+          <strong>Banco:</strong> ${banco}
+        </p>
 
-        <p><strong>Valor:</strong> $${valor}</p>
+        <p>
+          <strong>Valor:</strong> $${valor}
+        </p>
 
-        <p><strong>Referencia:</strong> ${referencia}</p>
+        <p>
+          <strong>Referencia:</strong> ${referencia}
+        </p>
 
-        <p><strong>Estado:</strong> APROBADO ✅</p>
+        <p>
+          <strong>Fecha:</strong> ${fecha}
+        </p>
+
+        <p class="estado">
+          Estado: ${estado}
+        </p>
 
         <a href="/api/pagos-pse">
 
           Realizar otro pago
+
+        </a>
+        <a class="volver" href="/">
+
+           ⬅ Volver al inicio
 
         </a>
 
@@ -378,24 +429,32 @@ router.post('/', (req, res) => {
 
 });
 
-module.exports = router;
-
 // ===============================
-// CONSULTAR ESTADO DEL PAGO
+// CONSULTAR PAGO POR REFERENCIA
 // ===============================
 
 router.get('/:ref', (req, res) => {
 
   const referencia = req.params.ref;
 
-  res.json({
+  const pago = pagos.find(
 
-    referencia: referencia,
+    p => p.referencia === referencia
 
-    estado: 'APROBADO',
+  );
 
-    mensaje: 'Pago procesado correctamente'
+  if (!pago) {
 
-  });
+    return res.status(404).json({
+
+      mensaje: 'Pago no encontrado'
+
+    });
+
+  }
+
+  res.json(pago);
 
 });
+
+module.exports = router;

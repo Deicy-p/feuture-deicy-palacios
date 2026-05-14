@@ -182,6 +182,33 @@ router.get('/', (req, res) => {
             required
           >
 
+          <label>Correo electrónico</label>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="correo@gmail.com"
+            required
+          >
+
+          <label>Teléfono</label>
+
+          <input
+            type="text"
+            name="telefono"
+            placeholder="3001234567"
+            required
+          >
+
+          <label>Ciudad</label>
+
+          <input
+            type="text"
+            name="ciudad"
+            placeholder="Ciudad"
+            required
+          >
+
           <label>Producto</label>
 
           <select name="producto" required>
@@ -214,13 +241,13 @@ router.get('/', (req, res) => {
 
             <option>Extensiones Humanas</option>
 
-            <option> Extensiones de Clip</option>
+            <option>Extensiones de Clip</option>
 
             <option>Extensiones Adhesivas</option>
 
             <option>Bases de maquillaje</option>
 
-            <option>Labiales </option>
+            <option>Labiales</option>
 
             <option>Paleta de Sombras</option>
 
@@ -269,27 +296,72 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
+  const personas = require('../models/personas');
+
   const {
 
     cliente,
-
     producto,
-
-    cantidad
+    cantidad,
+    email,
+    telefono,
+    ciudad
 
   } = req.body;
 
   const nuevoPedido = {
 
+    id: pedidos.length + 1,
+
     cliente,
 
     producto,
 
-    cantidad
+    cantidad,
+
+    estado: 'PENDIENTE'
 
   };
 
   pedidos.push(nuevoPedido);
+
+  // ===============================
+  // REGISTRAR PERSONA
+  // ===============================
+
+  const existePersona = personas.find(
+
+    p => p.email === email
+
+  );
+
+  if (!existePersona) {
+
+    const nuevaPersona = {
+
+      id: personas.length + 1,
+
+      tipoDoc: 'CC',
+
+      numDoc: '000000000',
+
+      nombres: cliente,
+
+      apellidos: '',
+
+      email: email,
+
+      telefono: telefono,
+
+      ciudad: ciudad,
+
+      activo: true
+
+    };
+
+    personas.push(nuevaPersona);
+
+  }
 
   res.send(`
 
@@ -334,6 +406,11 @@ router.post('/', (req, res) => {
           color:#8b5e3c;
         }
 
+        p{
+
+          margin-top:15px;
+        }
+
         a{
 
           display:inline-block;
@@ -359,13 +436,25 @@ router.post('/', (req, res) => {
 
       <div class="mensaje">
 
-        <h1>✨ Pedido realizado con éxito ✨</h1>
+        <h1>
+          ✨ Pedido realizado con éxito ✨
+        </h1>
 
-        <p><strong>Cliente:</strong> ${cliente}</p>
+        <p>
+          <strong>Cliente:</strong> ${cliente}
+        </p>
 
-        <p><strong>Producto:</strong> ${producto}</p>
+        <p>
+          <strong>Producto:</strong> ${producto}
+        </p>
 
-        <p><strong>Cantidad:</strong> ${cantidad}</p>
+        <p>
+          <strong>Cantidad:</strong> ${cantidad}
+        </p>
+
+        <p>
+          El cliente fue registrado correctamente.
+        </p>
 
         <a href="/api/pedidos">
 

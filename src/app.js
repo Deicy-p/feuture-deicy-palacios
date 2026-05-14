@@ -10,7 +10,6 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// Carpeta pública
 app.use(express.static('src/public'));
 
 // ===============================
@@ -217,7 +216,7 @@ app.get('/', (req, res) => {
 
           <a href="/api/citas">Citas</a>
 
-          <a href="/api/personas">Personas</a>
+          <a href="/personas">Personas</a>
 
         </nav>
 
@@ -273,7 +272,7 @@ app.get('/', (req, res) => {
             📅 Citas
           </a>
 
-          <a href="/api/personas">
+          <a href="/personas">
             👩 Personas
           </a>
 
@@ -297,6 +296,124 @@ app.get('/', (req, res) => {
 });
 
 // ===============================
+// VISTA PERSONAS
+// ===============================
+
+app.get('/personas', (req, res) => {
+
+  const personas = require('./models/personas');
+
+  let html = `
+
+  <html>
+
+    <head>
+
+      <title>Personas - Lovely Aaron</title>
+
+      <style>
+
+        body{
+          font-family:Poppins, sans-serif;
+          background:#f5f5f5;
+          padding:40px;
+        }
+
+        h1{
+          text-align:center;
+          color:#d48c70;
+          margin-bottom:40px;
+        }
+
+        .contenedor{
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+          gap:20px;
+        }
+
+        .card{
+          background:white;
+          padding:25px;
+          border-radius:20px;
+          box-shadow:0 5px 15px rgba(0,0,0,0.1);
+          transition:0.3s;
+        }
+
+        .card:hover{
+          transform:translateY(-5px);
+        }
+
+        .card h2{
+          color:#333;
+          margin-bottom:15px;
+        }
+
+        .card p{
+          color:#666;
+          margin:8px 0;
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <h1>
+        Clientes Registrados
+      </h1>
+
+      <div class="contenedor">
+
+  `;
+
+  personas.forEach(persona => {
+
+    html += `
+
+      <div class="card">
+
+        <h2>
+          ${persona.nombres} ${persona.apellidos}
+        </h2>
+
+        <p>
+          📧 ${persona.email}
+        </p>
+
+        <p>
+          📱 ${persona.telefono}
+        </p>
+
+        <p>
+          📍 ${persona.ciudad}
+        </p>
+
+        <p>
+          🪪 ${persona.tipoDoc}: ${persona.numDoc}
+        </p>
+
+      </div>
+
+    `;
+
+  });
+
+  html += `
+
+      </div>
+
+    </body>
+
+  </html>
+
+  `;
+
+  res.send(html);
+
+});
+
+// ===============================
 // IMPORTAR RUTAS
 // ===============================
 
@@ -313,12 +430,6 @@ const personasRouter = require('./routes/personas');
 // ===============================
 // USAR RUTAS
 // ===============================
-
-app.use(express.json());
-
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static('src/public'));
 
 app.use('/api/productos', productosRouter);
 

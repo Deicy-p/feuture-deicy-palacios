@@ -372,6 +372,20 @@ router.get('/', (req, res) => {
           background:
           rgba(255,255,255,0.1);
         }
+          .volver{
+
+           display:block;
+
+          margin-top:25px;
+
+          text-align:center;
+
+          color:white;
+
+          text-decoration:none;
+
+          font-size:16px;
+}
 
       </style>
 
